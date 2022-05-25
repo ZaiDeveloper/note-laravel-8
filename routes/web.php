@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SendWebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,23 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/websocket/send-socket-io', function () {
-    event(new \App\Events\SendMessage());
-    dd('Event Run Successfully.');
+Route::group([
+    'prefix' => 'websocket',
+    'as' => 'websocket.',
+], function () {
+    Route::get('/send-socket-io', function () {
+        event(new \App\Events\SendMessage());
+        dd('Event Run Successfully.');
+    });
+    Route::get('/receive-socket-io', function () {
+        return view('websocket/receive-socket-io');
+    });
 });
-Route::get('/websocket/receive-socket-io', function () {
-    return view('websocket/receive-socket-io');
+
+Route::group([
+    'prefix' => 'webhook',
+    'as' => 'webhook'
+], function () {
+    Route::webhooks('webhook-receiving-url');
+    Route::get('/send-test', [SendWebhookController::class, 'send'])->name('send-test-webhook');
 });
