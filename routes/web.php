@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SendWebhookController;
+use App\Http\Controllers\WebscrapingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +38,12 @@ Route::group([
 ], function () {
     Route::webhooks('webhook-receiving-url');
     Route::get('/send-test', [SendWebhookController::class, 'send'])->name('send-test-webhook');
+});
+
+
+Route::group([
+    'prefix' => 'webscraping',
+    'as' => 'webscraping'
+], function () {
+    Route::get('/sample', [WebscrapingController::class, 'sample'])->name('sample');
 });
