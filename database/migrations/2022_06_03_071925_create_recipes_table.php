@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCustomPackagesTable extends Migration
+class CreateRecipesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCustomPackagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('custom_packages', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('recipes', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('title');
-            $table->text('body');
-            $table->boolean('is_publish')->default(0);
+            $table->text('procedure')->nullable();
+            $table->tinyInteger('publisher_id')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateCustomPackagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('custom_packages');
+        Schema::dropIfExists('recipes');
     }
 }
