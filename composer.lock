@@ -6568,7 +6568,7 @@
             "dist": {
                 "type": "path",
                 "url": "../packages/CustomAuth",
-                "reference": "d924138489dfd3e84d05dbdfea5c082064f10a12"
+                "reference": "c0a2ae82e96614918698582200f3652d30dfc67d"
             },
             "require": {
                 "illuminate/contracts": "^8.0",
